@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 
 import * as yup from 'yup';
 
@@ -19,13 +19,14 @@ const postmonLocationSchema = yup.object().shape({
   }),
 });
 
+
 class LocationForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.getLocationDataFromPostmon = this.getLocationDataFromPostmon.bind(this);
-    this.mapPostmonLocationToLocation = this.mapPostmonLocationToLocation.bind(this);
+    this.mapPostmonLocationToLocationForm = this.mapPostmonLocationToLocationForm.bind(this);
     this.state = {
       publicName: 'Tudu',
       number: 0,
@@ -84,14 +85,15 @@ class LocationForm extends React.Component {
   async onSubmit(values, actions) {
 
     const postmonLocation = await this.getLocationDataFromPostmon(values.zipCode);
-    const location = this.mapPostmonLocationToLocation(postmonLocation);
+    const locationForm = this.mapPostmonLocationToLocationForm(postmonLocation);
 
-    this.setState({...location});
+    this.setState({...locationForm});
 
+    this.props.onFilled('location', this.state);
     actions.setSubmitting(false);
   }
 
-  mapPostmonLocationToLocation(postmonLocation) {
+  mapPostmonLocationToLocationForm(postmonLocation) {
     const location = {
       publicName: postmonLocation.logradouro,
       number: null,
@@ -132,6 +134,7 @@ class LocationForm extends React.Component {
         }
       }).catch(error => {
         console.error(JSON.stringify(error));
+        alert('Ocorreu um erro ao consultar o endereço');
       });
   }
 

@@ -28,20 +28,20 @@ class LocationForm extends React.Component {
     this.getLocationDataFromPostmon = this.getLocationDataFromPostmon.bind(this);
     this.mapPostmonLocationToLocationForm = this.mapPostmonLocationToLocationForm.bind(this);
     this.state = {
-      publicName: 'Tudu',
+      publicName: '',
       number: 0,
-      neighborhood: 'Errado',
+      neighborhood: '',
       zipCode: '04013010',
       city: {
         id: null,
-        name: 'Tá errado',
-        ibgeCode: 0
+        name: '',
+        ibgeCode: null
       },
       state: {
         id: null,
-        name: 'Tbm tá errado',
-        federativeUnity: 'SP',
-        ibgeCode: 0
+        name: '',
+        federativeUnity: '',
+        ibgeCode: null
       }
     };
   }

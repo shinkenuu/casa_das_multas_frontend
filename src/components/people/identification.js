@@ -3,6 +3,8 @@ import { ErrorMessage, Formik, Field, Form } from 'formik';
 
 import * as yup from 'yup';
 
+import Checkbox from '../checkbox';
+
 
 const identificationValidationSchema = yup.object().shape({
   name: yup.string()
@@ -16,7 +18,13 @@ const identificationValidationSchema = yup.object().shape({
     .max(20, 'Limite de caracteres excedido'),
   rg_ie: yup.string()
     .trim()
-    .max(20, 'Limite de caracteres excedido')
+    .max(20, 'Limite de caracteres excedido'),
+  legal_type: yup.string()
+    .matches(/(FÍSICA|JURÍDICA)/, {message: 'Tipo inválido'}),
+  partner_type: yup.array().of(
+    yup.string()
+      .matches(/(CLIENTE|FORNECEDOR|COLABORADOR|CONTRATANTE)/, {message: 'Pessoa inválida'})
+  )
 });
 
 
@@ -29,7 +37,9 @@ class IdentificationForm extends React.Component {
       name: '',
       nickname: '',
       cpf_cnpf: '',
-      rg_ie: ''
+      rg_ie: '',
+      legal_type: '',
+      partner_type: []
     };
   }
 
@@ -39,8 +49,33 @@ class IdentificationForm extends React.Component {
         initialValues={this.state}
         onSubmit={this.onSubmit}
         validationSchema={identificationValidationSchema}
-        render={({ errors, status, touched, isSubmitting }) => (
+        render={({ isSubmitting }) => (
           <Form>
+
+            <label htmlFor="legal_type">Pessoa </label>
+            <Field component="select" name="legal_type" disabled={isSubmitting}>
+              <option value="FÍSICA">Física</option>
+              <option value="JURÍDICA">Jurídica</option>
+            </Field>
+            <ErrorMessage name="legal_type">
+              {msg => <div className="error error-message">{msg}</div>}
+            </ErrorMessage>
+
+            <div className="person-type-wrapper">
+
+              <Checkbox name="partner_type" value="CLIENTE" displayValue="Cliente" disabled={isSubmitting}/>
+
+              <Checkbox name="partner_type" value="FORNECEDOR" displayValue="Fornecedor" disabled={isSubmitting}/>
+
+              <Checkbox name="partner_type" value="COLABORADOR" displayValue="Colaborador" disabled={isSubmitting}/>
+
+              <Checkbox name="partner_type" value="CONTRATANTE" displayValue="Contratante" disabled={isSubmitting}/>
+
+              <ErrorMessage name="partner_type">
+                {msg => <div className="error error-message">{msg}</div>}
+              </ErrorMessage>
+
+            </div>
 
             <label htmlFor="name">Nome/Razão Social </label>
             <Field type="text" name="name" disabled={isSubmitting}/>
@@ -66,17 +101,13 @@ class IdentificationForm extends React.Component {
               {msg => <div className="error error-message">{msg}</div>}
             </ErrorMessage>
 
-            <button type="submit" disabled={isSubmitting}>
-              Pesquisar
-            </button>
-
           </Form>
         )}
       />
     );
   }
 
-  async onSubmit(values, actions) {
+  onSubmit(values, actions) {
 
     this.setState({...values});
 

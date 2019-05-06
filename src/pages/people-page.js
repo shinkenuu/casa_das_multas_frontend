@@ -1,8 +1,8 @@
 import React from 'react';
 
-import LocationForm from '../components/location-form';
-import IdentificationForm from '../components/person-identification-form';
-
+import LocationForm from '../components/people/location';
+import IdentificationForm from '../components/people/identification';
+import ContactForm from '../components/people/contact';
 
 class PeoplePage extends React.Component {
 
@@ -17,6 +17,7 @@ class PeoplePage extends React.Component {
 
         <IdentificationForm onFilled={this.handleFormFilling}/>
         <LocationForm onFilled={this.handleFormFilling}/>
+        <ContactForm onFilled={this.handleFormFilling}/>
 
       </div>
     );

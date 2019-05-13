@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import PeoplePage from './pages/people-page';
+import PeoplePage from './pages/people';
 
 function App() {
 

@@ -1,17 +1,17 @@
 import React from 'react';
-import { ErrorMessage, Formik, Field, Form } from 'formik';
+import { ErrorMessage, Field } from 'formik';
 
 import * as yup from 'yup';
 
 import Checkbox from '../checkbox';
 
 
-const identificationValidationSchema = yup.object().shape({
+export const identificationValidationSchema = yup.object().shape({
   name: yup.string()
     .max(60, 'Limite de caracteres excedido'),
   nickname: yup.string()
     .max(60, 'Limite de caracteres excedido'),
-  cpf_cnpf: yup.string()
+  cpf_cnpj: yup.string()
     .trim()
     .matches(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/,
     {message: 'Formato inválido'})
@@ -21,100 +21,70 @@ const identificationValidationSchema = yup.object().shape({
     .max(20, 'Limite de caracteres excedido'),
   legal_type: yup.string()
     .matches(/(FÍSICA|JURÍDICA)/, {message: 'Tipo inválido'}),
-  partner_type: yup.array().of(
+  partner_types: yup.array().of(
     yup.string()
-      .matches(/(CLIENTE|FORNECEDOR|COLABORADOR|CONTRATANTE)/, {message: 'Pessoa inválida'})
+      .matches(/(CUSTOMER|PROVIDER|COLLABORATOR|CONTRATANTE)/, {message: 'Pessoa inválida'})
   )
 });
 
 
-class IdentificationForm extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      name: '',
-      nickname: '',
-      cpf_cnpf: '',
-      rg_ie: '',
-      legal_type: '',
-      partner_type: []
-    };
-  }
+export class IdentificationForm extends React.Component {
 
   render() {
     return (
-      <Formik
-        initialValues={this.state}
-        onSubmit={this.onSubmit}
-        validationSchema={identificationValidationSchema}
-        render={({ isSubmitting }) => (
-          <Form>
+      <div className="people-identification">
 
-            <label htmlFor="legal_type">Pessoa </label>
-            <Field component="select" name="legal_type" disabled={isSubmitting}>
-              <option value="FÍSICA">Física</option>
-              <option value="JURÍDICA">Jurídica</option>
-            </Field>
-            <ErrorMessage name="legal_type">
-              {msg => <div className="error error-message">{msg}</div>}
-            </ErrorMessage>
+        <label htmlFor="identification.legal_type">Pessoa </label>
+        <Field component="select" name="identification.legal_type" disabled={this.props.isSubmitting}>
+          <option value="FÍSICA">Física</option>
+          <option value="JURÍDICA">Jurídica</option>
+        </Field>
+        <ErrorMessage name="identification.legal_type">
+          {msg => <div className="error error-message">{msg}</div>}
+        </ErrorMessage>
 
-            <div className="person-type-wrapper">
+        <div className="people-identification-partner-type-wrapper">
 
-              <Checkbox name="partner_type" value="CLIENTE" displayValue="Cliente" disabled={isSubmitting}/>
+          <Checkbox name="identification.partner_types" value="CUSTOMER" displayValue="Cliente" disabled={this.props.isSubmitting}/>
 
-              <Checkbox name="partner_type" value="FORNECEDOR" displayValue="Fornecedor" disabled={isSubmitting}/>
+          <Checkbox name="identification.partner_types" value="PROVIDER" displayValue="Fornecedor" disabled={this.props.isSubmitting}/>
 
-              <Checkbox name="partner_type" value="COLABORADOR" displayValue="Colaborador" disabled={isSubmitting}/>
+          <Checkbox name="identification.partner_types" value="COLLABORATOR" displayValue="Colaborador" disabled={this.props.isSubmitting}/>
 
-              <Checkbox name="partner_type" value="CONTRATANTE" displayValue="Contratante" disabled={isSubmitting}/>
+          <Checkbox name="identification.partner_types" value="CONTRATANTE" displayValue="Contratante" disabled={this.props.isSubmitting}/>
 
-              <ErrorMessage name="partner_type">
-                {msg => <div className="error error-message">{msg}</div>}
-              </ErrorMessage>
+          <ErrorMessage name="identification.partner_types">
+            {msg => <div className="error error-message">{msg}</div>}
+          </ErrorMessage>
 
-            </div>
+        </div>
 
-            <label htmlFor="name">Nome/Razão Social </label>
-            <Field type="text" name="name" disabled={isSubmitting}/>
-            <ErrorMessage name="name">
-              {msg => <div className="error error-message">{msg}</div>}
-            </ErrorMessage>
+        <label htmlFor="identification.name">Nome/Razão Social </label>
+        <Field type="text" name="identification.name" disabled={this.props.isSubmitting}/>
+        <ErrorMessage name="identification.name">
+          {msg => <div className="error error-message">{msg}</div>}
+        </ErrorMessage>
 
-            <label htmlFor="nickname">Apelido/Fantasia </label>
-            <Field type="text" name="nickname" disabled={isSubmitting}/>
-            <ErrorMessage name="nickname">
-              {msg => <div className="error error-message">{msg}</div>}
-            </ErrorMessage>
+        <label htmlFor="identification.nickname">Apelido/Fantasia </label>
+        <Field type="text" name="identification.nickname" disabled={this.props.isSubmitting}/>
+        <ErrorMessage name="identification.nickname">
+          {msg => <div className="error error-message">{msg}</div>}
+        </ErrorMessage>
 
-            <label htmlFor="cpf_cnpf">CPF/CNPJ </label>
-            <Field type="text" name="cpf_cnpf" disabled={isSubmitting}/>
-            <ErrorMessage name="cpf_cnpf">
-              {msg => <div className="error error-message">{msg}</div>}
-            </ErrorMessage>
+        <label htmlFor="identification.cpf_cnpj">CPF/CNPJ </label>
+        <Field type="text" name="identification.cpf_cnpj" disabled={this.props.isSubmitting}/>
+        <ErrorMessage name="identification.cpf_cnpj">
+          {msg => <div className="error error-message">{msg}</div>}
+        </ErrorMessage>
 
-            <label htmlFor="rg_ie">RG/IE </label>
-            <Field type="text" name="rg_ie" disabled={isSubmitting}/>
-            <ErrorMessage name="rg_ie">
-              {msg => <div className="error error-message">{msg}</div>}
-            </ErrorMessage>
+        <label htmlFor="identification.rg_ie">RG/IE </label>
+        <Field type="text" name="identification.rg_ie" disabled={this.props.isSubmitting}/>
+        <ErrorMessage name="identification.rg_ie">
+          {msg => <div className="error error-message">{msg}</div>}
+        </ErrorMessage>
 
-          </Form>
-        )}
-      />
+      </div>
     );
   }
 
-  onSubmit(values, actions) {
-
-    this.setState({...values});
-
-    this.props.onFilled('identification', this.state);
-    actions.setSubmitting(false);
-  }
-
 }
-
-export default IdentificationForm;

@@ -4,7 +4,7 @@ import * as yup from 'yup';
 const peopleSchema = yup.object().shape({
   id: yup.number().required(),
   uid: yup.string().trim(),
-  updated_at: yup.datetime().required(),
+  updated_at: yup.string().required(),
   legal_type: yup.string().trim().max(8).matches(/(FÍSICA|JURÍDICA)/),
   name: yup.string().trim().max(60),
   nickname: yup.string().trim().max(60),
@@ -46,9 +46,10 @@ const peopleSchema = yup.object().shape({
 });
 
 
-export const fetchPeople = async (people_id) => {
+export const fetchPeople = people_id => {
   return fetch(`http://localhost:5000/people/${people_id}`)
     .then(response => {
+      console.log(response);
       if (response.ok) {
         return response.json();
       } else {

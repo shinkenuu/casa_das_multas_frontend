@@ -25,7 +25,6 @@ class PeoplePage extends React.Component {
   constructor(props) {
     super(props);
     this.resetPeopleForm = this.resetPeopleForm.bind(this);
-    this.findPeopleById = this.findPeopleById.bind(this);
     this.resetLocationForm = this.resetLocationForm.bind(this);
     this.setFormValuesFromState = this.setFormValuesFromState.bind(this);
     this.mapPeopleToPeopleForm = this.mapPeopleToPeopleForm.bind(this);
@@ -39,7 +38,7 @@ class PeoplePage extends React.Component {
       },
       identification: {
         legal_type: '',
-        partner_type: [],
+        partner_types: [],
         name: '',
         nickname: '',
         cpf_cnpf: '',
@@ -108,22 +107,13 @@ class PeoplePage extends React.Component {
 
 
   async resetPeopleForm(form) {
-    const people = this.findPeopleById(form.values.registry.id);
+    const people = await fetchPeople(form.values.registry.id);
 
     const peopleForm = this.mapPeopleToPeopleForm(people);
 
     await this.setState(peopleForm);
 
     this.setFormValuesFromState(form);
-  }
-
-
-  findPeopleById(people_id) {
-    console.log('Finding people id:' + people_id);
-
-    const people = fetchPeople(people_id);
-
-    return people;
   }
 
 
@@ -157,10 +147,10 @@ class PeoplePage extends React.Component {
       },
       identification: {
         legal_type: people.legal_type,
-        partner_type: people.partner_types,
+        partner_types: people.partner_types,
         name: people.name,
         nickname: people.nickname,
-        cpf_cnpj: people.cpf_cnpf,
+        cpf_cnpj: people.cpf_cnpj,
         rg_ie: people.rg_ie
       },
       contact: {

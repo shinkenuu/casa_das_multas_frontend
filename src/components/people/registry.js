@@ -21,7 +21,8 @@ export const registryValidationSchema = yup.object().shape({
     .trim()
     .max(80, 'Limite de caracteres excedido')
     .nullable(),
-  is_active: yup.boolean().required()
+  is_active: yup.boolean().required(),
+  is_incomplete_data: yup.boolean().required()
 });
 
 
@@ -65,6 +66,15 @@ export class RegistryForm extends React.Component {
           <option value={false}>Inativo</option>
         </Field>
         <ErrorMessage name="registry.is_active">
+          {msg => <div className="error error-message">{msg}</div>}
+        </ErrorMessage>
+
+        <label htmlFor="registry.is_incomplete_data">Dados incompletos </label>
+        <Field component="select" name="registry.is_incomplete_data" disabled={this.props.isSubmitting}>
+          <option value={true}>Sim</option>
+          <option value={false}>Não</option>
+        </Field>
+        <ErrorMessage name="registry.is_incomplete_data">
           {msg => <div className="error error-message">{msg}</div>}
         </ErrorMessage>
 

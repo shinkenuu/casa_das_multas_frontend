@@ -175,7 +175,8 @@ const mapPeopleToPeopleFormValues = people => {
       code: 'b5eb5c8d5bce87de87d5ce7db8ce7d',
       uid: people.uid,
       updated_at: people.updated_at,
-      is_active: false
+      is_active: false,
+      is_incomplete_data: people.is_incomplete_data
     },
     identification: {
       legal_type: people.legal_type,
@@ -222,6 +223,7 @@ const mapPeopleFormValuesToPeople = formValues => {
     code: registry.code,
     updated_at: registry.updated_at,
     is_active: registry.is_active,
+    is_incomplete_data: registry.is_incomplete_data,
 
     legal_type: identification.legal_type,
     partner_types: identification.partner_types,

@@ -8,22 +8,28 @@ import Checkbox from '../checkbox';
 
 export const identificationValidationSchema = yup.object().shape({
   name: yup.string()
-    .max(60, 'Limite de caracteres excedido'),
+    .max(60, 'Limite de caracteres excedido')
+    .nullable(),
   nickname: yup.string()
-    .max(60, 'Limite de caracteres excedido'),
+    .max(60, 'Limite de caracteres excedido')
+    .nullable(),
   cpf_cnpj: yup.string()
     .trim()
     .matches(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/,
     {message: 'Formato inválido'})
-    .max(20, 'Limite de caracteres excedido'),
+    .max(20, 'Limite de caracteres excedido')
+    .nullable(),
   rg_ie: yup.string()
     .trim()
-    .max(20, 'Limite de caracteres excedido'),
+    .max(20, 'Limite de caracteres excedido')
+    .nullable(),
   legal_type: yup.string()
-    .matches(/(FÍSICA|JURÍDICA)/, {message: 'Tipo inválido'}),
+    .matches(/(FÍSICA|JURÍDICA)/, {message: 'Tipo inválido'})
+    .required(),
   partner_types: yup.array().of(
     yup.string()
       .matches(/(CUSTOMER|PROVIDER|COLLABORATOR|CONTRATANTE)/, {message: 'Pessoa inválida'})
+      .nullable()
   )
 });
 

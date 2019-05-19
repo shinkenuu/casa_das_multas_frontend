@@ -9,27 +9,30 @@ export const contactValidationSchema = yup.object().shape({
     yup.string()
     .trim()
     .max(60, 'Limite de caracteres excedido')
+    .nullable()
   ),
   names: yup.array().of(
     yup.string()
     .trim()
     .max(60, 'Limite de caracteres excedido')
+    .nullable()
   ),
   fax: yup.string()
     .trim()
-    .max(20, 'Limite de caracteres excedido'),
+    .max(20, 'Limite de caracteres excedido')
+    .nullable(),
   cellphone: yup.string()
     .trim()
-    .max(20, 'Limite de caracteres excedido'),
+    .max(20, 'Limite de caracteres excedido')
+    .nullable(),
   email: yup.string()
     .trim()
-    .max(80, 'Limite de caracteres excedido'),
+    .max(80, 'Limite de caracteres excedido')
+    .nullable(),
   email_nfe: yup.string()
     .trim()
-    .max(80, 'Limite de caracteres excedido'),
-  website: yup.string()
-    .trim()
-    .max(4000, 'Limite de caracteres excedido'),
+    .max(80, 'Limite de caracteres excedido')
+    .nullable()
 });
 
 

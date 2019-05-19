@@ -7,16 +7,20 @@ import * as yup from 'yup';
 export const registryValidationSchema = yup.object().shape({
   id: yup.string()
     .trim()
-    .max(60, 'Limite de caracteres excedido'),
+    .max(60, 'Limite de caracteres excedido')
+    .nullable(),
   code: yup.string()
     .trim()
-    .max(20, 'Limite de caracteres excedido'),
+    .max(20, 'Limite de caracteres excedido')
+    .nullable(),
   uid: yup.string()
     .trim()
-    .max(20, 'Limite de caracteres excedido'),
+    .max(20, 'Limite de caracteres excedido')
+    .nullable(),
   updated_at: yup.string()
     .trim()
-    .max(80, 'Limite de caracteres excedido'),
+    .max(80, 'Limite de caracteres excedido')
+    .nullable(),
   is_active: yup.boolean().required()
 });
 

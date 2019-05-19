@@ -5,20 +5,20 @@ import * as yup from 'yup';
 
 
 export const locationValidationSchema = yup.object().shape({
-  publicName: yup.string().required(),
-  number: yup.string(),
-  neighborhood: yup.string().required(),
-  zipCode: yup.string().required(),
+  publicName: yup.string().nullable(),
+  number: yup.string().nullable(),
+  neighborhood: yup.string().nullable(),
+  zipCode: yup.string().nullable(),
   city: yup.object().shape({
     id: yup.number().required(),
-    name: yup.string().required(),
-    ibgeCode: yup.string().required()
+    name: yup.string().nullable(),
+    ibgeCode: yup.string().nullable()
   }),
   state: yup.object().shape({
     id: yup.number().required(),
-    name: yup.string().required(),
-    federativeUnity: yup.string().required(),
-    ibgeCode: yup.string().required()
+    name: yup.string().nullable(),
+    federativeUnity: yup.string().nullable(),
+    ibgeCode: yup.string().nullable()
   }),
 });
 

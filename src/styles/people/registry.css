@@ -1,0 +1,25 @@
+.people-registry {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  height: 20%;
+}
+
+.people-registry-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.people-registry-metadata {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.people-registry-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

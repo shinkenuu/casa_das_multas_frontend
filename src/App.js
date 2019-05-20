@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import PeoplePage from './pages/people';
 
@@ -7,11 +6,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
 
-        <PeoplePage />
+      <PeoplePage />
 
-      </header>
     </div>
   );
 }

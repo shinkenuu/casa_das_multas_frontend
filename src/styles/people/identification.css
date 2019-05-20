@@ -1,0 +1,19 @@
+.people-identification {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  height: 30%;
+}
+
+.people-identification-partner-type-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.people-identification-codes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

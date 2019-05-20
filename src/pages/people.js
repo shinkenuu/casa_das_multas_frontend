@@ -11,6 +11,8 @@ import { IdentificationForm, identificationValidationSchema } from '../component
 import { LocationForm, locationValidationSchema, mapPostmonLocationToLocation } from '../components/people/location';
 import { RegistryForm, registryValidationSchema }  from '../components/people/registry';
 
+import '../styles/people/page.css';
+
 
 const peopleValidationSchema = yup.object().shape({
   registry: registryValidationSchema,

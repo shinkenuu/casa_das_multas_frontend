@@ -3,6 +3,8 @@ import { Field } from 'formik';
 
 import * as yup from 'yup';
 
+import '../../styles/people/location.css';
+
 
 export const locationValidationSchema = yup.object().shape({
   publicName: yup.string().nullable(),
@@ -28,27 +30,46 @@ export class LocationForm extends React.Component {
     return (
       <div className="people-location">
 
-        <label htmlFor="location.publicName">Logradouro </label>
-        <Field type="text" name="location.publicName" disabled={true}/>
+        <div>
 
-        <label htmlFor="location.neighborhood">Bairro </label>
-        <Field type="text" name="location.neighborhood" disabled={true}/>
+          <label htmlFor="location.publicName">Logradouro </label>
+          <Field type="text" name="location.publicName" disabled={this.props.isSubmitting}/>
 
-        <label htmlFor="location.number">Nº </label>
-        <Field type="text" name="location.number" disabled={this.props.isSubmitting}/>
+        </div>
+        <div>
 
-        <label htmlFor="location.zipCode">CEP </label>
-        <Field type="text" name="location.zipCode" disabled={this.props.isSubmitting}/>
+          <label htmlFor="location.neighborhood">Bairro </label>
+          <Field type="text" name="location.neighborhood" disabled={this.props.isSubmitting}/>
 
-        <label htmlFor="location.city.name">Cidade </label>
-        <Field type="text" name="location.city.name" disabled={true}/>
+        </div>
+        <div>
 
-        <label htmlFor="location.state.name">Estado </label>
-        <Field type="text" name="location.state.name" disabled={true}/>
+          <label htmlFor="location.number">Nº </label>
+          <Field type="text" name="location.number" disabled={this.props.isSubmitting}/>
 
-        <button type="button" onClick={() => {this.props.onFindLocationByZipCode()}}>
-          Pesquisar
-        </button>
+        </div>
+        <div>
+
+          <label htmlFor="location.zipCode">CEP </label>
+          <Field type="text" name="location.zipCode" disabled={this.props.isSubmitting}/>
+
+        </div>
+        <div>
+
+          <label htmlFor="location.city.name">Cidade </label>
+          <Field type="text" name="location.city.name" disabled={this.props.isSubmitting}/>
+
+          <button type="button" onClick={() => {this.props.onFindLocationByZipCode()}}>
+            Pesquisar
+          </button>
+
+        </div>
+        <div>
+
+          <label htmlFor="location.state.name">Estado </label>
+          <Field type="text" name="location.state.name" disabled={this.props.isSubmitting}/>
+
+        </div>
 
       </div>
     );

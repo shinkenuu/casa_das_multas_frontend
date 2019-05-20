@@ -1,0 +1,10 @@
+.people-location {
+  display: flex;
+  justify-content: space-around;
+
+  height: 20%;
+}
+
+.people-location > input {
+  height: 20px;
+}

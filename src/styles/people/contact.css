@@ -1,0 +1,18 @@
+.people-contact {
+  display: flex;
+  justify-content: space-around;
+
+  height: 40%;
+}
+
+.people-contact-left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.people-contact-right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
